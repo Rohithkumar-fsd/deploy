@@ -31,3 +31,11 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Terraform local state and provider caches
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfvars
+aws-demo-key.pem
