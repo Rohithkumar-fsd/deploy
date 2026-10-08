@@ -47,7 +47,7 @@ jobs:
           ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/home/ubuntu/app.jar
 
       # 6. Restart application
-      - # 6. Restart application
+      # 6. Restart application
       - name: Restart application
         run: |
           ssh -i ~/.ssh/ec2_key \
