@@ -14,7 +14,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. Install Java
+      # 2. Install Java 17
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
@@ -44,6 +44,4 @@ jobs:
       # 6. Restart application cleanly
       - name: Restart application
         run: |
-          ssh -i ~/.ssh/ec2_key \
-          ubuntu@${{ secrets.EC2_HOST }} \
-          "pkill -9 -f 'java -jar' || true; sleep 3; nohup java -jar /home/ubuntu/app.jar > /home/ubuntu/app.log 2>&1 &"
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/ec2_key ubuntu@${{ secrets.EC2_HOST }} "fuser -k 8080/tcp || true; sleep 2; nohup java -jar /home/ubuntu/app.jar > /home/ubuntu/app.log 2>&1 &"
