@@ -47,8 +47,9 @@ jobs:
           ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/home/ubuntu/app.jar
 
       # 6. Restart application
+      - # 6. Restart application
       - name: Restart application
         run: |
           ssh -i ~/.ssh/ec2_key \
-          ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} \
-          "pkill -f 'java -jar app.jar' || true; nohup java -jar /home/ubuntu/app.jar > /home/ubuntu/app.log 2>&1 &"
+          ubuntu@${{ secrets.EC2_HOST }} \
+          "pkill -9 -f 'java -jar' || true; sleep 3; nohup java -jar /home/ubuntu/app.jar > /home/ubuntu/app.log 2>&1 &"
